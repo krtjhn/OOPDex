@@ -1,0 +1,1132 @@
+.collection-scene {
+  position: relative;
+  isolation: isolate;
+  min-height: calc(100vh - 11rem);
+  overflow: hidden;
+  border-radius: 2rem;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  background:
+    url("/assets/images/pogo_bg.png") center / 100% 100% no-repeat;
+  background-attachment: fixed;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.65),
+    0 2rem 5rem rgba(15, 23, 42, 0.14);
+}
+
+.collection-scene::before {
+  display: none;
+}
+
+.collection-scene::after {
+  display: none;
+}
+
+.collection-scene--loading {
+  display: grid;
+  place-items: center;
+  color: #0f172a;
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+.collection-scene__mist {
+  display: none;
+}
+
+.collection-scene__sunbeam {
+  display: none;
+}
+
+.collection-scene__sunbeam--left {
+  display: none;
+}
+
+.collection-scene__sunbeam--right {
+  display: none;
+}
+
+.collection-header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.4rem);
+  padding: 1rem 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 1.35rem;
+  background: rgba(255, 255, 255, 0.48);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 1rem 2.5rem rgba(15, 23, 42, 0.08);
+}
+
+.collection-header h2 {
+  margin: 0;
+  color: #0f172a;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 950;
+  letter-spacing: -0.06em;
+  line-height: 0.95;
+}
+
+.collection-header__eyebrow {
+  margin: 0 0 0.35rem;
+  color: #2a75bb;
+  font-size: 0.75rem;
+  font-weight: 950;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.collection-total {
+  flex-shrink: 0;
+  border: 1px solid rgba(42, 117, 187, 0.22);
+  border-radius: 999px;
+  padding: 0.65rem 1rem;
+  color: #155c9f;
+  background: rgba(255, 255, 255, 0.68);
+  font-size: 0.85rem;
+  font-weight: 950;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
+}
+
+.collection-empty {
+  position: relative;
+  z-index: 2;
+  margin: 4rem auto;
+  max-width: 34rem;
+  text-align: center;
+}
+
+.collection-empty p {
+  margin: 0;
+  color: #334155;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.collection-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(1.1rem, 2vw, 1.9rem) clamp(0.85rem, 1.6vw, 1.4rem);
+  padding: clamp(0.75rem, 1.8vw, 1.35rem) 0.25rem 1.5rem;
+}
+
+.collection-pokemon {
+  position: relative;
+  display: flex;
+  min-height: clamp(14rem, 22vw, 18rem);
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  padding: 1.25rem 0.55rem 0.85rem;
+  border: 1px solid transparent;
+  border-radius: 1.6rem;
+  background: transparent;
+  transform: translateY(0);
+  transition:
+    transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.24s ease,
+    background 0.24s ease;
+}
+
+.collection-pokemon:hover,
+.collection-pokemon:focus-within {
+  border-color: transparent;
+  background: transparent;
+  transform: none;
+}
+
+.collection-pokemon__spotlight {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  width: 60%;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  filter: blur(0.6rem);
+  transform: translateX(-50%);
+  transition: all 0.38s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.collection-pokemon:hover .collection-pokemon__spotlight,
+.collection-pokemon:focus-within .collection-pokemon__spotlight {
+  opacity: 0.95;
+  background: radial-gradient(circle, var(--poke-type-color, #ffffff) 10%, rgba(255, 255, 255, 0) 70%);
+  width: 80%;
+  height: 2.2rem;
+  filter: blur(0.4rem);
+  transform: translateX(-50%) scale(1.25);
+}
+
+.collection-pokemon__shadow {
+  display: none;
+}
+
+.collection-pokemon__image {
+  position: relative;
+  z-index: 2;
+  width: min(76%, 10rem);
+  height: 10rem;
+  object-fit: contain;
+  filter: drop-shadow(0 1.05rem 1.2rem rgba(15, 23, 42, 0.2));
+  transform: translateY(0);
+  transform-origin: center bottom;
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.3s ease,
+    opacity 0.3s ease;
+  animation: collection-float 3.4s ease-in-out infinite;
+}
+
+.collection-pokemon:hover .collection-pokemon__image,
+.collection-pokemon:focus-within .collection-pokemon__image {
+  filter:
+    drop-shadow(0 1.2rem 1.5rem rgba(15, 23, 42, 0.3))
+    drop-shadow(0 0 1.5rem var(--poke-type-color, rgba(255, 255, 255, 0.4)));
+  transform: translateY(-2.2rem) scale(1.38) rotate(3deg);
+}
+
+.collection-pokemon:hover .collection-pokemon__shadow,
+.collection-pokemon:focus-within .collection-pokemon__shadow {
+  opacity: 0.2;
+  transform: translateX(-50%) scale(0.76);
+}
+
+.collection-pokemon__actions {
+  position: absolute;
+  inset: auto 0.75rem 0.65rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  opacity: 0;
+  transform: translateY(0.75rem);
+  pointer-events: none;
+  transition: opacity 0.24s ease, transform 0.24s ease;
+}
+
+.collection-pokemon:hover .collection-pokemon__actions,
+.collection-pokemon:focus-within .collection-pokemon__actions {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Pokemon Type Glow Colors */
+.collection-pokemon.grass { --poke-type-color: #78C850; }
+.collection-pokemon.fire { --poke-type-color: #F08030; }
+.collection-pokemon.water { --poke-type-color: #6890F0; }
+.collection-pokemon.bug { --poke-type-color: #A8B820; }
+.collection-pokemon.normal { --poke-type-color: #A8A878; }
+.collection-pokemon.poison { --poke-type-color: #A040A0; }
+.collection-pokemon.electric { --poke-type-color: #F8D030; }
+.collection-pokemon.ground { --poke-type-color: #E0C068; }
+.collection-pokemon.fairy { --poke-type-color: #EE99AC; }
+.collection-pokemon.fighting { --poke-type-color: #C03028; }
+.collection-pokemon.psychic { --poke-type-color: #F85888; }
+.collection-pokemon.rock { --poke-type-color: #B8A038; }
+.collection-pokemon.ghost { --poke-type-color: #705898; }
+.collection-pokemon.ice { --poke-type-color: #98D8D8; }
+.collection-pokemon.dragon { --poke-type-color: #7038F8; }
+.collection-pokemon.steel { --poke-type-color: #B8B8D0; }
+.collection-pokemon.flying { --poke-type-color: #A890F0; }
+.collection-pokemon.dark { --poke-type-color: #705848; }
+
+/* Catch/Release Button styling */
+.collection-release-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.24s ease;
+  outline: none;
+}
+
+.collection-release-btn__image {
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+  transition: transform 0.3s ease;
+}
+
+.collection-release-btn:hover {
+  transform: scale(1.22) rotate(15deg);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+}
+
+.collection-release-btn:active {
+  transform: scale(0.9) rotate(-10deg);
+}
+
+.collection-pokemon:has(.collection-release-btn:hover) .collection-pokemon__image,
+.collection-pokemon:has(.collection-release-btn:focus-visible) .collection-pokemon__image {
+  opacity: 0.9;
+  transform: translateY(-2.2rem) scale(1.3) rotate(-2deg);
+}
+
+.release-encounter {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  display: grid;
+  place-items: center;
+  padding: clamp(0.8rem, 2vw, 1.5rem);
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+
+/* Pokemon Type Glow Colors & Gradients for Release Encounter */
+.release-encounter.grass { --encounter-type-color: #78C850; --encounter-type-glow: rgba(120, 200, 80, 0.55); }
+.release-encounter.fire { --encounter-type-color: #F08030; --encounter-type-glow: rgba(240, 128, 48, 0.55); }
+.release-encounter.water { --encounter-type-color: #6890F0; --encounter-type-glow: rgba(104, 144, 240, 0.55); }
+.release-encounter.bug { --encounter-type-color: #A8B820; --encounter-type-glow: rgba(168, 184, 32, 0.55); }
+.release-encounter.normal { --encounter-type-color: #A8A878; --encounter-type-glow: rgba(168, 168, 120, 0.55); }
+.release-encounter.poison { --encounter-type-color: #A040A0; --encounter-type-glow: rgba(160, 64, 160, 0.55); }
+.release-encounter.electric { --encounter-type-color: #F8D030; --encounter-type-glow: rgba(248, 208, 48, 0.55); }
+.release-encounter.ground { --encounter-type-color: #E0C068; --encounter-type-glow: rgba(224, 192, 104, 0.55); }
+.release-encounter.fairy { --encounter-type-color: #EE99AC; --encounter-type-glow: rgba(238, 153, 172, 0.55); }
+.release-encounter.fighting { --encounter-type-color: #C03028; --encounter-type-glow: rgba(192, 48, 40, 0.55); }
+.release-encounter.psychic { --encounter-type-color: #F85888; --encounter-type-glow: rgba(248, 88, 136, 0.55); }
+.release-encounter.rock { --encounter-type-color: #B8A038; --encounter-type-glow: rgba(184, 160, 56, 0.55); }
+.release-encounter.ghost { --encounter-type-color: #705898; --encounter-type-glow: rgba(112, 88, 152, 0.55); }
+.release-encounter.ice { --encounter-type-color: #98D8D8; --encounter-type-glow: rgba(152, 216, 216, 0.55); }
+.release-encounter.dragon { --encounter-type-color: #7038F8; --encounter-type-glow: rgba(112, 56, 248, 0.55); }
+.release-encounter.steel { --encounter-type-color: #B8B8D0; --encounter-type-glow: rgba(184, 184, 208, 0.55); }
+.release-encounter.flying { --encounter-type-color: #A890F0; --encounter-type-glow: rgba(168, 144, 240, 0.55); }
+.release-encounter.dark { --encounter-type-color: #705848; --encounter-type-glow: rgba(112, 88, 72, 0.55); }
+
+.release-encounter__close {
+  position: fixed;
+  top: clamp(1rem, 2vw, 1.5rem);
+  right: clamp(1rem, 2vw, 1.5rem);
+  z-index: 10000;
+  display: grid;
+  width: 2.8rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  color: #ffffff;
+  background: rgba(15, 23, 42, 0.55);
+  cursor: pointer;
+  transition: all 0.24s ease;
+}
+
+.release-encounter__close:hover:not(:disabled) {
+  transform: scale(1.1);
+  background: rgba(220, 38, 38, 0.85);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 15px rgba(220, 38, 38, 0.4);
+}
+
+.release-encounter__close:disabled {
+  cursor: wait;
+  opacity: 0.45;
+}
+
+.release-encounter__field {
+  position: relative;
+  display: grid;
+  width: min(56rem, 96vw);
+  height: min(42rem, 86vh);
+  min-height: 34rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 1.35rem;
+  background:
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.05) 50%, rgba(15, 23, 42, 0.3) 100%),
+    url("/assets/images/pogo_bg.png") center top / 512px repeat;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.58),
+    0 2rem 5rem rgba(0, 0, 0, 0.55);
+}
+
+.release-encounter__field.is-capturing {
+  animation: screen-shake 0.8s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* Vignette overlay */
+.release-encounter__field::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse at 50% 0%, var(--encounter-type-glow, rgba(135, 206, 235, 0.18)) 0%, transparent 65%),
+    radial-gradient(ellipse at 50% 100%, rgba(34, 85, 34, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse at 0% 50%, rgba(0,0,0,0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 50%, rgba(0,0,0,0.3) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Ground mist / fog strip */
+.release-encounter__field::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  height: 38%;
+  background:
+    linear-gradient(
+      to top,
+      rgba(120, 180, 90, 0.28) 0%,
+      rgba(120, 180, 90, 0.12) 40%,
+      transparent 100%
+    );
+  pointer-events: none;
+  animation: ground-mist-sway 6s ease-in-out infinite;
+}
+
+.release-encounter__sky,
+.release-encounter__rings {
+  display: none;
+}
+
+/* Animated dust motes */
+.release-encounter__dust {
+  position: absolute;
+  z-index: 3;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(200, 230, 180, 0.75);
+  box-shadow: 0 0 4px 2px rgba(180, 220, 140, 0.5);
+  pointer-events: none;
+  animation: dust-drift var(--dur, 3s) ease-in var(--delay, 0s) infinite;
+  opacity: 0;
+}
+
+/* Advanced Cyber HUD Layout */
+.release-encounter__hud-bracket {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  pointer-events: none;
+  z-index: 8;
+  transition: border-color 0.3s ease;
+}
+.release-encounter.grass .release-encounter__hud-bracket { border-color: rgba(120, 200, 80, 0.45); }
+.release-encounter.fire .release-encounter__hud-bracket { border-color: rgba(240, 128, 48, 0.45); }
+.release-encounter.water .release-encounter__hud-bracket { border-color: rgba(104, 144, 240, 0.45); }
+.release-encounter.electric .release-encounter__hud-bracket { border-color: rgba(248, 208, 48, 0.45); }
+.release-encounter.psychic .release-encounter__hud-bracket { border-color: rgba(248, 88, 136, 0.45); }
+
+.release-encounter__hud-bracket--tl { top: 1.5rem; left: 1.5rem; border-right: 0; border-bottom: 0; }
+.release-encounter__hud-bracket--tr { top: 1.5rem; right: 1.5rem; border-left: 0; border-bottom: 0; }
+.release-encounter__hud-bracket--bl { bottom: 1.5rem; left: 1.5rem; border-right: 0; border-top: 0; }
+.release-encounter__hud-bracket--br { bottom: 1.5rem; right: 1.5rem; border-left: 0; border-top: 0; }
+
+.release-encounter__hud-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), var(--encounter-type-glow, rgba(255, 255, 255, 0.3)), rgba(255, 255, 255, 0));
+  pointer-events: none;
+  z-index: 7;
+  animation: hud-scan 4s linear infinite;
+  opacity: 0.32;
+}
+
+.release-encounter__hud-readout {
+  position: absolute;
+  top: 1.5rem;
+  left: 3.5rem;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+.release-encounter__hud-icon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--encounter-type-color, #2a75bb);
+  box-shadow: 0 0 8px var(--encounter-type-color, #2a75bb);
+  animation: hud-dot-blink 1s ease-in-out infinite;
+}
+
+.release-encounter__hud-text {
+  font-family: monospace;
+  font-size: 0.68rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Explosive Energy Blast */
+.release-encounter__portal {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 24rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  /* Make it look more like a glowing energy burst rather than a flat circle */
+  background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, var(--encounter-type-color, #2a75bb) 35%, transparent 70%);
+  box-shadow: 0 0 6rem var(--encounter-type-glow, rgba(42, 117, 187, 0.6));
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+  /* Use mix-blend-mode for a more realistic light effect */
+  mix-blend-mode: screen;
+}
+
+.release-encounter__field.is-capturing .release-encounter__portal {
+  animation: energy-blast 1.2s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes energy-blast {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2);
+  }
+  15% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+  40% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.8);
+  }
+}
+
+/* Wobbling dust shockwaves centered under the ball */
+.release-pokeball__wobble-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: clamp(5.6rem, 10vw, 7.4rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid var(--encounter-type-color, rgba(255, 255, 255, 0.8));
+  box-shadow: 0 0 1.5rem var(--encounter-type-color, rgba(255, 255, 255, 0.5));
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.release-pokeball__wobble-ring--1 {
+  animation: wobble-shockwave 0.5s ease forwards;
+  animation-delay: 1.2s;
+}
+
+.release-pokeball__wobble-ring--2 {
+  animation: wobble-shockwave 0.5s ease forwards;
+  animation-delay: 1.8s;
+}
+
+.release-pokeball__wobble-ring--3 {
+  animation: wobble-shockwave 0.5s ease forwards;
+  animation-delay: 2.4s;
+}
+
+@keyframes wobble-shockwave {
+  0% {
+    transform: translate(-50%, -50%) scale(0.2, 0.08);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.4, 0.96);
+    opacity: 0;
+  }
+}
+
+/* Success Burst/Explosion Particles */
+.release-pokeball__explosion {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.release-pokeball__spark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--encounter-type-color, #ffcb05);
+  box-shadow: 0 0 12px var(--encounter-type-color, #ffcb05);
+  transform: translate(-50%, -50%) rotate(var(--angle)) translateY(0) scale(1);
+  animation: spark-fly var(--speed) cubic-bezier(0.1, 0.8, 0.1, 1) var(--delay) both;
+}
+
+@keyframes spark-fly {
+  0% {
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-150px) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Screen flash flare on success gotcha click */
+.release-encounter__success-blast {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  background: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.release-encounter__field.is-success .release-encounter__success-blast {
+  animation: success-screen-flash 0.9s cubic-bezier(0.1, 0.8, 0.1, 1) both;
+}
+
+/* Target Area & Cybernetic Rings */
+.release-encounter__pokemon-target {
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  display: grid;
+  width: min(18rem, 48vw);
+  aspect-ratio: 1;
+  place-items: center;
+  transform: translateX(-50%);
+  z-index: 4;
+  filter: drop-shadow(0 2.5rem 1.5rem rgba(0,0,0,0.35));
+}
+
+.release-encounter__target-reticle-outer {
+  position: absolute;
+  inset: 0%;
+  z-index: 2;
+  border: 2px dashed var(--encounter-type-color, rgba(255, 255, 255, 0.5));
+  border-radius: 50%;
+  opacity: 0.45;
+  animation: reticle-spin-cw 20s linear infinite;
+  pointer-events: none;
+}
+
+.release-encounter__target-reticle-inner {
+  position: absolute;
+  inset: 12%;
+  z-index: 2;
+  border: 1px dashed var(--encounter-type-color, rgba(255, 255, 255, 0.6));
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: reticle-spin-ccw 14s linear infinite;
+  pointer-events: none;
+}
+
+.release-encounter__pokemon-target::before {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 220px;
+  background: linear-gradient(to top, var(--encounter-type-color, #fff), transparent);
+  box-shadow: 0 0 2rem 0.5rem var(--encounter-type-color, rgba(255, 255, 255, 0.8));
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.release-encounter__pokemon-target::after {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--encounter-type-color, #fff);
+  box-shadow: 0 0 1.5rem var(--encounter-type-color, rgba(255, 255, 255, 0.8));
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.release-encounter__pokemon-target img {
+  position: relative;
+  z-index: 3;
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 1.5rem 1.6rem rgba(15, 23, 42, 0.5));
+  animation: release-pokemon-idle 2.2s ease-in-out infinite;
+}
+
+.release-encounter__lock-ring {
+  position: absolute;
+  inset: 7%;
+  z-index: 2;
+  border: 0.2rem solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  background:
+    url("/assets/pogo/pokeball-glow.png") center / contain no-repeat,
+    radial-gradient(circle, rgba(255, 255, 255, 0.44), rgba(42, 117, 187, 0.16) 48%, transparent 70%);
+  box-shadow:
+    0 0 1.2rem rgba(255, 255, 255, 0.72),
+    inset 0 0 1.2rem rgba(255, 255, 255, 0.45);
+  animation: release-ring-pulse 1.45s ease-in-out infinite;
+}
+
+.release-encounter__status {
+  position: absolute;
+  left: 50%;
+  top: 1.2rem;
+  z-index: 5;
+  display: flex;
+  width: min(30rem, calc(100% - 2rem));
+  align-items: center;
+  flex-direction: column;
+  gap: 0.22rem;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+  color: #0f172a;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 0.9rem 2rem rgba(15, 23, 42, 0.12);
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.release-encounter__status strong {
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  font-weight: 950;
+  line-height: 1.1;
+}
+
+.release-encounter__status span {
+  color: #334155;
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.release-pokeball {
+  position: absolute;
+  left: 50%;
+  bottom: 2.2rem;
+  z-index: 10;
+  display: grid;
+  width: clamp(5.6rem, 10vw, 7.4rem);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.34), rgba(96, 165, 250, 0.12) 58%, transparent 70%);
+  box-shadow:
+    0 1rem 2rem rgba(15, 23, 42, 0.2),
+    0 0 1.6rem rgba(255, 255, 255, 0.24);
+  cursor: grab;
+  touch-action: none;
+  transform: translate(calc(-50% + var(--release-ball-x, 0px)), var(--release-ball-y, 0px));
+  transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.22s ease;
+}
+
+.release-pokeball.is-dragging {
+  cursor: grabbing;
+  filter: drop-shadow(0 0 1.2rem rgba(255, 255, 255, 0.92));
+  transition: none;
+}
+
+.release-pokeball__image {
+  display: block;
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+  pointer-events: none;
+  filter:
+    drop-shadow(0 0.8rem 1.3rem rgba(15, 23, 42, 0.28))
+    drop-shadow(0 0 0.8rem rgba(255, 255, 255, 0.5));
+}
+
+.release-encounter__field.is-missed .release-pokeball {
+  animation: release-ball-miss 0.34s ease both;
+}
+
+.release-encounter__field.is-capturing .release-pokeball {
+  animation: release-ball-capture 2.9s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+.release-encounter__field.is-success .release-pokeball {
+  transform: translate(-50%, 80px) scale(1);
+  filter: drop-shadow(0 0 1.5rem var(--encounter-type-color, #ffcb05));
+  animation: release-ball-success-click 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+.release-encounter__field.is-capturing .release-encounter__pokemon-target::before {
+  display: block;
+  animation: release-vacuum-beam 0.8s ease both;
+}
+
+.release-encounter__field.is-capturing .release-encounter__pokemon-target::after {
+  display: block;
+  animation: release-vacuum-sparkles 0.8s ease both;
+}
+
+.release-encounter__field.is-capturing .release-encounter__lock-ring,
+.release-encounter__field.is-capturing .release-encounter__target-reticle-outer,
+.release-encounter__field.is-capturing .release-encounter__target-reticle-inner {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.release-encounter__field.is-capturing .release-encounter__pokemon-target img,
+.release-encounter__field.is-success .release-encounter__pokemon-target img {
+  animation: release-pokemon-sendoff 0.8s ease both;
+}
+
+.release-encounter__field.is-success .release-pokeball {
+  transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) scale(1);
+  filter: drop-shadow(0 0 1.5rem var(--encounter-type-color, #ffcb05));
+  animation: release-ball-success-click 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+.release-encounter__field.is-success .release-pokeball::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 15;
+  width: min(24rem, 72vw);
+  aspect-ratio: 1;
+  background:
+    url("/assets/pogo/catch-star.png") 12% 28% / 4rem 4rem no-repeat,
+    url("/assets/pogo/catch-sparkle.png") 82% 22% / 3rem 3rem no-repeat,
+    url("/assets/pogo/catch-sparkle.png") 72% 78% / 2.7rem 2.7rem no-repeat,
+    radial-gradient(circle, rgba(255, 255, 255, 0.9), transparent 62%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: release-success-burst 1.1s cubic-bezier(0.15, 0.85, 0.35, 1) both;
+}
+
+.release-throw-trail {
+  position: fixed;
+  z-index: 9998;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.release-throw-trail::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--trail-length, 4rem);
+  height: 0.48rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.96), rgba(96, 165, 250, 0.68), transparent);
+  filter: drop-shadow(0 0 0.8rem rgba(96, 165, 250, 0.62));
+  opacity: 0.84;
+  transform: translate(-50%, -50%) rotate(var(--trail-angle, 0rad));
+  transform-origin: left center;
+}
+
+.release-throw-trail span {
+  position: absolute;
+  left: -0.55rem;
+  top: -0.55rem;
+  width: 1.1rem;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background:
+    url("/assets/pogo/catch-sparkle.png") center / contain no-repeat,
+    radial-gradient(circle, rgba(255, 255, 255, 0.96), rgba(255, 203, 5, 0.55));
+  filter: drop-shadow(0 0 0.8rem rgba(255, 255, 255, 0.84));
+}
+
+.release-throw-trail.is-live::before {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 1), rgba(255, 203, 5, 0.82), rgba(42, 117, 187, 0.2), transparent);
+}
+
+@keyframes collection-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -0.42rem;
+  }
+}
+
+@keyframes ground-mist-sway {
+  0%, 100% { opacity: 0.85; transform: scaleX(1); }
+  50% { opacity: 1; transform: scaleX(1.04); }
+}
+
+@keyframes dust-drift {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.7); }
+  20% { opacity: 0.7; }
+  80% { opacity: 0.5; }
+  100% { opacity: 0; transform: translate(var(--dx, 18px), -60px) scale(1.2); }
+}
+
+@keyframes collection-glow-pulse {
+  0%,
+  100% {
+    filter: blur(0);
+  }
+  50% {
+    filter: blur(0.12rem);
+  }
+}
+
+@keyframes release-pokemon-idle {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-0.55rem) scale(1.03);
+  }
+}
+
+@keyframes release-ring-pulse {
+  0%,
+  100% {
+    transform: scale(0.92);
+    opacity: 0.76;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes release-ball-miss {
+  0%,
+  100% {
+    filter: none;
+  }
+  35% {
+    filter: saturate(0.8) brightness(0.9);
+  }
+}
+
+@keyframes release-ball-capture {
+  0% {
+    transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) scale(1.1);
+  }
+  15% {
+    transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) scale(1.2);
+    filter: drop-shadow(0 0 1.5rem var(--encounter-type-color, #fff));
+  }
+  28% {
+    transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) scale(0.9, 1.1);
+  }
+  32% {
+    transform: translate(calc(-50% + var(--release-ball-x)), calc(var(--release-ball-y) - 18px)) scale(1);
+  }
+  36% {
+    transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) scale(1.1, 0.9);
+  }
+  40% {
+    transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) scale(1);
+  }
+  41% { transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) rotate(0deg); }
+  43% { transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) rotate(-18deg) translateX(-6px); }
+  47% { transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) rotate(18deg) translateX(6px); }
+  51% { transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) rotate(-8deg) translateX(-3px); }
+  55% { transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) rotate(0deg); }
+  62% { transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) rotate(0deg); }
+  64% { transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) rotate(-14deg) translateX(-4px); }
+  68% { transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) rotate(14deg) translateX(4px); }
+  72% { transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) rotate(-6deg) translateX(-2px); }
+  76% { transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) rotate(0deg); }
+  82% { transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) rotate(0deg); }
+  84% { transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) rotate(-10deg) translateX(-3px); }
+  88% { transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) rotate(10deg) translateX(3px); }
+  92% { transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) rotate(-4deg) translateX(-1px); }
+  96%, 100% { transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) rotate(0deg); }
+}
+
+@keyframes release-ball-success-click {
+  0% { transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) scale(1); }
+  30% { transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) scale(1.3); }
+  100% { transform: translate(calc(-50% + var(--release-ball-x)), var(--release-ball-y)) scale(1); }
+}
+
+@keyframes release-pokemon-sendoff {
+  0% {
+    opacity: 1;
+    filter: brightness(1) saturate(1) drop-shadow(0 1.5rem 1.6rem rgba(15, 23, 42, 0.5));
+    transform: translateY(0) scale(1);
+  }
+  30% {
+    opacity: 1;
+    filter: brightness(2) saturate(2) drop-shadow(0 0 1.5rem var(--encounter-type-color, #fff));
+    transform: translate(var(--release-vacuum-x-34, 0px), calc(var(--release-vacuum-y-34, 61px) - 20px)) scale(0.6, 1.2) rotate(15deg);
+  }
+  100% {
+    opacity: 0;
+    filter: brightness(5) saturate(3) drop-shadow(0 0 2rem var(--encounter-type-color, #fff));
+    transform: translate(var(--release-vacuum-x, 0px), var(--release-vacuum-y, 180px)) scale(0.01) rotate(45deg);
+  }
+}
+
+@keyframes release-vacuum-beam {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scaleY(0.12);
+  }
+  24%,
+  78% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scaleY(1.05);
+  }
+}
+
+@keyframes release-vacuum-ring {
+  0% {
+    opacity: 0.86;
+    transform: scale(0.92) rotate(0deg);
+  }
+  52% {
+    opacity: 1;
+    transform: scale(1.22) rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform:
+      translate(var(--release-vacuum-x, 0px), var(--release-vacuum-y, 180px))
+      scale(0.16)
+      rotate(360deg);
+  }
+}
+
+@keyframes release-vacuum-sparkles {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-1rem) scale(0.45) rotate(0deg);
+  }
+  28%,
+  72% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform:
+      translateX(calc(-50% + var(--release-vacuum-x, 0px)))
+      translateY(var(--release-vacuum-y, 180px))
+      scale(0.16)
+      rotate(32deg);
+  }
+}
+
+@keyframes release-success-burst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.34) rotate(0deg);
+  }
+  45% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.35) rotate(28deg);
+  }
+}
+
+@keyframes screen-shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+@keyframes reticle-spin-cw {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes reticle-spin-ccw {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes success-screen-flash {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@media (max-width: 1280px) {
+  .collection-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 980px) {
+  .collection-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .collection-scene {
+    border-radius: 1.3rem;
+    padding: 1rem;
+  }
+
+  .collection-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .collection-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .release-encounter__field {
+    min-height: 32rem;
+    height: 82vh;
+  }
+
+  .release-encounter__pokemon-target {
+    top: 30%;
+    width: min(16rem, 68vw);
+  }
+}
+
+@media (max-width: 440px) {
+  .collection-grid {
+    grid-template-columns: 1fr;
+  }
+}
