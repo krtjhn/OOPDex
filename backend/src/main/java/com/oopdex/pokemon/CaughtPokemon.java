@@ -45,17 +45,6 @@ public class CaughtPokemon {
     // Field to store the user-assigned nickname for this caught Pokemon (nullable)
     private String nickname;
 
-    // Annotation to make the level column non-nullable in the database
-    @Column(nullable = false)
-    // Field to store the Pokemon's level, defaulting to 1 when first caught
-    private int level = 1;
-
-    // Annotation to make the experience column non-nullable in the database
-    @Column(nullable = false)
-    // Field to store the Pokemon's experience points, defaulting to 0 when first caught
-    private int experience = 0;
-
-
     // Annotation to map this field to the "date_caught" column, non-nullable
     @Column(name = "date_caught", nullable = false)
     // Field to store the exact date and time this Pokemon was caught, defaulting to the current time
@@ -72,10 +61,6 @@ public class CaughtPokemon {
         this.pokemonId = pokemonId;
         // Assign the user-provided nickname for the Pokemon
         this.nickname = nickname;
-        // Initialize the Pokemon's level to 1
-        this.level = 1;
-        // Initialize the Pokemon's experience points to 0
-        this.experience = 0;
         // Record the current date and time as the catch timestamp
         this.dateCaught = LocalDateTime.now();
     // End of the convenience constructor
@@ -136,35 +121,6 @@ public class CaughtPokemon {
         this.nickname = nickname;
     // End of the setNickname method
     }
-
-    // Getter method to retrieve the current level of this caught Pokemon
-    public int getLevel() {
-        // Return the stored level value
-        return level;
-    // End of the getLevel method
-    }
-
-    // Setter method to assign a level to this caught Pokemon
-    public void setLevel(int level) {
-        // Assign the provided level value to the field
-        this.level = level;
-    // End of the setLevel method
-    }
-
-    // Getter method to retrieve the experience points of this caught Pokemon
-    public int getExperience() {
-        // Return the stored experience value
-        return experience;
-    // End of the getExperience method
-    }
-
-    // Setter method to assign experience points to this caught Pokemon
-    public void setExperience(int experience) {
-        // Assign the provided experience value to the field
-        this.experience = experience;
-    // End of the setExperience method
-    }
-
 
     // Getter method to retrieve the date and time this Pokemon was caught
     public LocalDateTime getDateCaught() {

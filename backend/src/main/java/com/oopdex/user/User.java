@@ -37,27 +37,27 @@ public class User {
     private Long id;
 
     // Validation annotation to ensure the username is not blank
-    @NotBlank
+    @NotBlank(message = "Username is required")
     // Validation annotation to enforce the username length between 3 and 20 characters
-    @Size(min = 3, max = 20)
+    @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters")
     // Annotation to enforce a unique constraint on the username column in the database
     @Column(unique = true)
     // Field to store the user's unique username
     private String username;
 
     // Validation annotation to ensure the email is not blank
-    @NotBlank
+    @NotBlank(message = "Email is required")
     // Validation annotation to enforce a valid email format
-    @Email
+    @Email(message = "Please enter a valid email address")
     // Annotation to enforce a unique constraint on the email column in the database
     @Column(unique = true)
     // Field to store the user's unique email address
     private String email;
 
     // Validation annotation to ensure the password is not blank
-    @NotBlank
+    @NotBlank(message = "Password is required")
     // Validation annotation to enforce a minimum password length of 8 characters
-    @Size(min = 8)
+    @Size(min = 8, message = "Password must be at least 8 characters long")
     // Annotation to make the password write-only so it is never included in JSON responses
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     // Field to store the user's hashed password
@@ -68,20 +68,6 @@ public class User {
     // Field to store the user's role (ROLE_USER or ROLE_ADMIN)
     private Role role;
 
-    // Annotation to map this field to the "profile_picture_url" column with a max length of 500
-    @Column(name = "profile_picture_url", length = 500)
-    // Field to store the URL of the user's profile picture
-    private String profilePictureUrl;
-
-    // Annotation to store the bio as a TEXT column allowing longer content
-    @Column(columnDefinition = "TEXT")
-    // Field to store the user's biographical description
-    private String bio;
-
-    // Annotation to map this field to the "trainer_class" column with a max length of 50
-    @Column(name = "trainer_class", length = 50)
-    // Field to store the user's trainer class label (e.g., "Professor", "Trainer")
-    private String trainerClass;
 
     // Field to store the account creation timestamp, defaulting to the current date and time
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -172,47 +158,6 @@ public class User {
     // End of the setRole method
     }
 
-    // Getter method to retrieve the URL of the user's profile picture
-    public String getProfilePictureUrl() {
-        // Return the stored profile picture URL string
-        return profilePictureUrl;
-    // End of the getProfilePictureUrl method
-    }
-
-    // Setter method to assign a profile picture URL to this user
-    public void setProfilePictureUrl(String profilePictureUrl) {
-        // Assign the provided URL string to the field
-        this.profilePictureUrl = profilePictureUrl;
-    // End of the setProfilePictureUrl method
-    }
-
-    // Getter method to retrieve the user's bio
-    public String getBio() {
-        // Return the stored bio string
-        return bio;
-    // End of the getBio method
-    }
-
-    // Setter method to assign a bio to this user
-    public void setBio(String bio) {
-        // Assign the provided bio string to the field
-        this.bio = bio;
-    // End of the setBio method
-    }
-
-    // Getter method to retrieve the user's trainer class label
-    public String getTrainerClass() {
-        // Return the stored trainerClass string
-        return trainerClass;
-    // End of the getTrainerClass method
-    }
-
-    // Setter method to assign a trainer class to this user
-    public void setTrainerClass(String trainerClass) {
-        // Assign the provided trainer class string to the field
-        this.trainerClass = trainerClass;
-    // End of the setTrainerClass method
-    }
 
     // Getter method to retrieve the user's account creation timestamp
     public LocalDateTime getCreatedAt() {
