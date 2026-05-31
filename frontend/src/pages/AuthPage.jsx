@@ -146,10 +146,28 @@ const AuthPage = () => {
       }
     // Catch any errors thrown during login or registration
     } catch (err) {
-      // Safely extract the error message from the nested Axios response or generic Error object
-      const msg = err?.response?.data?.message || err?.response?.data || err?.message || 'Something went wrong. Please try again.';
-      // Ensure the extracted message is a string before setting state, otherwise provide a fallback
-      setError(typeof msg === 'string' ? msg : 'Invalid email or password.');
+      // Extract response data
+      const data = err?.response?.data;
+      let errorMsg = '';
+
+      if (data && typeof data === 'object') {
+        if (data.errors && typeof data.errors === 'object') {
+          // Format validation errors (e.g. "password: size must be at least 8")
+          errorMsg = Object.entries(data.errors)
+            .map(([field, msg]) => `${field}: ${msg}`)
+            .join(' | ');
+        } else if (data.message) {
+          errorMsg = data.message;
+        } else {
+          errorMsg = 'Invalid input values.';
+        }
+      } else if (typeof data === 'string') {
+        errorMsg = data;
+      } else {
+        errorMsg = err?.message || 'Something went wrong. Please try again.';
+      }
+
+      setError(errorMsg);
     // Ensure the loading state is reset regardless of success or failure
     } finally {
       // Set loading state to false

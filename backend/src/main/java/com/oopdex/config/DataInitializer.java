@@ -72,12 +72,6 @@ public class DataInitializer implements CommandLineRunner {
             oak.setPassword(passwordEncoder.encode("prof_oak_123"));
             // Assign the ADMIN role to this user so they have elevated privileges
             oak.setRole(User.Role.ROLE_ADMIN);
-            // Set a trainer class label for the admin's profile
-            oak.setTrainerClass("Professor");
-            // Set a biographical description for the admin's profile page
-            oak.setBio("Hello there! Welcome to the world of Pokémon!");
-            // Set the profile picture URL pointing to Professor Oak's sprite on GitHub
-            oak.setProfilePictureUrl("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/trainers/oak.png");
             // Save the newly created admin user to the database
             userRepository.save(oak);
         // End of the admin user seeding check
