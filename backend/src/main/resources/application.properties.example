@@ -3,7 +3,7 @@ server.port=${SERVER_PORT:8082}
 # Database Configuration
 spring.datasource.url=${DB_URL:jdbc:mysql://localhost:3306/oopdex}
 spring.datasource.username=${DB_USERNAME:oopdex}
-spring.datasource.password=${DB_PASSWORD:Admin@123}
+spring.datasource.password=${DB_PASSWORD:your_secure_db_password}
 spring.jpa.hibernate.ddl-auto=none
 spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
 spring.jpa.show-sql=false
@@ -13,12 +13,12 @@ spring.servlet.multipart.max-file-size=5MB
 spring.servlet.multipart.max-request-size=5MB
 app.upload-dir=uploads
 
-# JWT Security
-jwt.secret=${JWT_SECRET:a-very-long-and-secure-random-string-for-jwt-secret-key}
+# JWT Security - In production, replace with a strong 256-bit random key
+jwt.secret=${JWT_SECRET:replace_with_a_secure_256_bit_random_jwt_secret_key}
 jwt.expiration=${JWT_EXPIRATION:3600000}
 jwt.refresh-expiration=${JWT_REFRESH_EXPIRATION:604800000}
 
-# Default Admin Configuration (Overrides on startup)
+# Default Admin Configuration
 app.admin.username=${APP_ADMIN_USERNAME:oak}
 app.admin.email=${APP_ADMIN_EMAIL:oak@pokemon.lab}
-app.admin.password=${APP_ADMIN_PASSWORD:prof_oak_123}
+app.admin.password=${APP_ADMIN_PASSWORD:replace_with_a_secure_admin_password}
