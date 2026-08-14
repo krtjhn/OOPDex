@@ -163,15 +163,18 @@ public class GlobalExceptionHandler {
     }
 
 
+    // Logger for recording unexpected errors on the server side
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
     // Annotation to declare this method as the catch-all handler for any unhandled Exception
     @ExceptionHandler(Exception.class)
     // Method to handle any unexpected exceptions that are not caught by more specific handlers
     public ResponseEntity<Object> handleGeneralException(Exception ex) {
-        // Build a 500 Internal Server Error response body with a generic error message
-        Map<String, Object> body = errorBody(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred");
-        // Add the exception's detail message to the response for debugging purposes
-        body.put("details", ex.getMessage());
-        // Return a 500 Internal Server Error response with the error body
+        // Log the full exception with stack trace securely on the server
+        log.error("Unhandled exception caught by GlobalExceptionHandler: ", ex);
+        // Build a 500 Internal Server Error response body with a safe, non-leaking error message
+        Map<String, Object> body = errorBody(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred. Please try again later.");
+        // Return a 500 Internal Server Error response with the safe error body
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     // End of the handleGeneralException method
     }

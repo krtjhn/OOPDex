@@ -1,5 +1,17 @@
 # Root gitignore
 
+# Environment Files & Secrets (NEVER COMMIT SENSITIVE KEYS)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+backend/.env
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
 # Backend ignores
 backend/target/
 backend/.mvn/wrapper/maven-wrapper.jar
@@ -11,11 +23,19 @@ backend/.settings
 backend/.springBeans
 backend/.sts4-cache
 backend/uploads/
+backend/*.log
+backend/logs/
 
 # Frontend ignores
 frontend/node_modules/
 frontend/dist/
+frontend/dist-ssr/
+frontend/*.local
 frontend/vite.config.js.timestamp*
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
 
 # General IDE and System ignores
 .idea/

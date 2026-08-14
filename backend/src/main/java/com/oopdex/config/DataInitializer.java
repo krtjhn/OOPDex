@@ -13,6 +13,8 @@ import com.oopdex.user.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 // Import PasswordEncoder for securely hashing the default admin password
 import org.springframework.security.crypto.password.PasswordEncoder;
+// Import Value annotation to inject properties from application configuration
+import org.springframework.beans.factory.annotation.Value;
 // Import Component annotation to register this class as a Spring-managed bean
 import org.springframework.stereotype.Component;
 
@@ -32,6 +34,18 @@ public class DataInitializer implements CommandLineRunner {
     private final PasswordEncoder passwordEncoder;
     // Field for the Gen1 Pokemon seeder used to populate missing Pokemon data
     private final Gen1PokemonSeeder pokemonSeeder;
+
+    // Injected admin username from application properties
+    @Value("${app.admin.username:oak}")
+    private String adminUsername;
+
+    // Injected admin email from application properties
+    @Value("${app.admin.email:oak@pokemon.lab}")
+    private String adminEmail;
+
+    // Injected admin password from application properties
+    @Value("${app.admin.password:prof_oak_123}")
+    private String adminPassword;
 
     // Constructor to inject all required dependencies via Spring's dependency injection
     public DataInitializer(UserRepository userRepository,
@@ -60,16 +74,16 @@ public class DataInitializer implements CommandLineRunner {
         // End of the Pokemon seeding check
         }
 
-        // Check if the default admin user "oak" does not already exist in the database
-        if (userRepository.findByUsername("oak").isEmpty()) {
+        // Check if the configured admin user does not already exist in the database
+        if (userRepository.findByUsername(adminUsername).isEmpty()) {
             // Create a new User object to represent the default administrator account
             User oak = new User();
-            // Set the username for the default admin to "oak"
-            oak.setUsername("oak");
-            // Set the email address for the default admin using the institutional domain
-            oak.setEmail("oak@pokemon.lab");
+            // Set the username for the admin
+            oak.setUsername(adminUsername);
+            // Set the email address for the admin
+            oak.setEmail(adminEmail);
             // Set the admin's password after encoding it securely with BCrypt
-            oak.setPassword(passwordEncoder.encode("prof_oak_123"));
+            oak.setPassword(passwordEncoder.encode(adminPassword));
             // Assign the ADMIN role to this user so they have elevated privileges
             oak.setRole(User.Role.ROLE_ADMIN);
             // Save the newly created admin user to the database
