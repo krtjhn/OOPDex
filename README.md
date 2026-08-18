@@ -9,10 +9,10 @@
 [![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2.5-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
 [![React](https://img.shields.io/badge/React-18.2.0-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.2.0-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![JWT](https://img.shields.io/badge/JWT-Auth-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)](https://jwt.io/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-F59E0B?style=for-the-badge&logo=open-source-initiative&logoColor=white)](LICENSE)
+
 
 <br />
 
@@ -87,26 +87,27 @@
 The Landing Page serves as the public entry point where any visitor can explore Generation 1 Pokémon with dynamic filtering, live search, and stat inspection modals.
 
 <div align="center">
+  <p align="center"><b>Hero Header</b></p>
+  <img src="frontend/public/assets/images/readme/image2.png" width="850" alt="Hero Header" />
+
+  <br /><br />
+
   <table>
     <tr>
-      <td align="center"><b>Hero Header</b></td>
-      <td align="center"><b>Live Search & Filter</b></td>
-      <td align="center"><b>Pokédex Grid</b></td>
+      <td align="center"><b>Search Pokémon by ID</b></td>
+      <td align="center"><b>Search Pokémon by Name</b></td>
     </tr>
     <tr>
-      <td><img src="frontend/public/assets/images/readme/image2.png" width="280" /></td>
-      <td><img src="frontend/public/assets/images/readme/image3.png" width="280" /></td>
-      <td><img src="frontend/public/assets/images/readme/image4.png" width="280" /></td>
+      <td><img src="frontend/public/assets/images/readme/image3.png" width="420" alt="Search Pokémon by ID" /></td>
+      <td><img src="frontend/public/assets/images/readme/image4.png" width="420" alt="Search Pokémon by Name" /></td>
     </tr>
     <tr>
+      <td align="center"><b>Filter Pokémon by Type</b></td>
       <td align="center"><b>Pokémon Stats Modal</b></td>
-      <td align="center"><b>Footer & Credits</b></td>
-      <td align="center"><b>Responsive Layout</b></td>
     </tr>
     <tr>
-      <td><img src="frontend/public/assets/images/readme/image5.png" width="280" /></td>
-      <td><img src="frontend/public/assets/images/readme/image6.png" width="280" /></td>
-      <td><img src="frontend/public/assets/images/readme/image4.png" width="280" /></td>
+      <td><img src="frontend/public/assets/images/readme/image5.png" width="420" alt="Filter Pokémon by Type" /></td>
+      <td><img src="frontend/public/assets/images/readme/image6.png" width="420" alt="Pokémon Stats Modal" /></td>
     </tr>
   </table>
 </div>
@@ -146,14 +147,18 @@ Trainers can catch Pokémon by double-tapping a card and dragging it to the acti
     <tr>
       <td align="center"><b>1. Drag to Pokéball Target</b></td>
       <td align="center"><b>2. Catching Animation</b></td>
+    </tr>
+    <tr>
+      <td><img src="frontend/public/assets/images/readme/image21.png" width="420" /></td>
+      <td><img src="frontend/public/assets/images/readme/image20.png" width="420" /></td>
+    </tr>
+    <tr>
       <td align="center"><b>3. "Gotcha!" Success</b></td>
       <td align="center"><b>4. Captured State (Grayed)</b></td>
     </tr>
     <tr>
-      <td><img src="frontend/public/assets/images/readme/image19.png" width="220" /></td>
-      <td><img src="frontend/public/assets/images/readme/image20.png" width="220" /></td>
-      <td><img src="frontend/public/assets/images/readme/image21.png" width="220" /></td>
-      <td><img src="frontend/public/assets/images/readme/image22.png" width="220" /></td>
+      <td><img src="frontend/public/assets/images/readme/image22.png" width="420" /></td>
+      <td><img src="frontend/public/assets/images/readme/image19.png" width="420" /></td>
     </tr>
   </table>
 </div>
@@ -168,14 +173,18 @@ In **My Collection**, trainers can manage captured Pokémon and trigger the rele
     <tr>
       <td align="center"><b>1. Hover Release Icon</b></td>
       <td align="center"><b>2. Drag Ball to Release</b></td>
+    </tr>
+    <tr>
+      <td><img src="frontend/public/assets/images/readme/image26.png" width="420" /></td>
+      <td><img src="frontend/public/assets/images/readme/image25.png" width="420" /></td>
+    </tr>
+    <tr>
       <td align="center"><b>3. "Released!" Confirmation</b></td>
       <td align="center"><b>4. Collection Updated</b></td>
     </tr>
     <tr>
-      <td><img src="frontend/public/assets/images/readme/image23.png" width="220" /></td>
-      <td><img src="frontend/public/assets/images/readme/image24.png" width="220" /></td>
-      <td><img src="frontend/public/assets/images/readme/image25.png" width="220" /></td>
-      <td><img src="frontend/public/assets/images/readme/image26.png" width="220" /></td>
+      <td><img src="frontend/public/assets/images/readme/image24.png" width="420" /></td>
+      <td><img src="frontend/public/assets/images/readme/image23.png" width="420" /></td>
     </tr>
   </table>
 </div>
@@ -195,8 +204,8 @@ Professor Oak has exclusive access to modify Pokémon attributes, manage the sof
       <td align="center"><b>Trainer User Management</b></td>
     </tr>
     <tr>
-      <td><img src="frontend/public/assets/images/readme/image9.png" width="420" /></td>
       <td><img src="frontend/public/assets/images/readme/image10.png" width="420" /></td>
+      <td><img src="frontend/public/assets/images/readme/image9.png" width="420" /></td>
     </tr>
     <tr>
       <td align="center"><b>Admin Actions on Modal</b></td>
@@ -217,14 +226,18 @@ Professor Oak has exclusive access to modify Pokémon attributes, manage the sof
     <tr>
       <td align="center"><b>1. Delete from Active</b></td>
       <td align="center"><b>2. Moved to Archive</b></td>
+    </tr>
+    <tr>
+      <td><img src="frontend/public/assets/images/readme/image14.png" width="420" /></td>
+      <td><img src="frontend/public/assets/images/readme/image16.png" width="420" /></td>
+    </tr>
+    <tr>
       <td align="center"><b>3. Restoring Record</b></td>
       <td align="center"><b>4. Restored to Active</b></td>
     </tr>
     <tr>
-      <td><img src="frontend/public/assets/images/readme/image13.png" width="220" /></td>
-      <td><img src="frontend/public/assets/images/readme/image14.png" width="220" /></td>
-      <td><img src="frontend/public/assets/images/readme/image15.png" width="220" /></td>
-      <td><img src="frontend/public/assets/images/readme/image16.png" width="220" /></td>
+      <td><img src="frontend/public/assets/images/readme/image15.png" width="420" /></td>
+      <td><img src="frontend/public/assets/images/readme/image13.png" width="420" /></td>
     </tr>
   </table>
 </div>
@@ -308,8 +321,6 @@ erDiagram
         bigint id PK
         bigint user_id FK "References USERS(id)"
         int pokemon_id FK "References POKEMONS(id)"
-        string nickname "Optional custom name"
-        datetime date_caught
     }
 ```
 
@@ -344,7 +355,6 @@ erDiagram
 | `GET` | `/api/pokemon/filter?type={type}` | Public | Filter active Pokémon by element type |
 | `POST` | `/api/pokemon/catch` | `ROLE_USER` | Add Pokémon to authenticated user's collection |
 | `GET` | `/api/pokemon/my-collection` | `ROLE_USER` | Retrieve authenticated user's captured Pokémon |
-| `PUT` | `/api/pokemon/{caughtId}` | `ROLE_USER` | Update custom nickname for a caught Pokémon |
 | `DELETE`| `/api/pokemon/release/{caughtId}`| `ROLE_USER` | Release (delete) Pokémon from collection |
 
 <br />
@@ -378,19 +388,19 @@ erDiagram
 ### Prerequisites
 - **Java 17+** (JDK 17 or JDK 21 recommended)
 - **Node.js 18+** & `npm`
-- **MySQL 8.0+**
+- **PostgreSQL 14+**
 
 <br />
 
 ---
 
 ### Step 1: Database Setup
-Create the MySQL database:
+Create the PostgreSQL database and user:
 ```sql
-CREATE DATABASE oopdex;
-CREATE USER 'oopdex'@'localhost' IDENTIFIED BY 'Admin@123';
-GRANT ALL PRIVILEGES ON oopdex.* TO 'oopdex'@'localhost';
-FLUSH PRIVILEGES;
+CREATE DATABASE oopdex_db;
+CREATE USER oopdex_user WITH ENCRYPTED PASSWORD 'oopdex@123';
+GRANT ALL PRIVILEGES ON DATABASE oopdex_db TO oopdex_user;
+GRANT ALL ON SCHEMA public TO oopdex_user;
 ```
 
 <br />
@@ -404,9 +414,9 @@ FLUSH PRIVILEGES;
    ```
 2. *(Optional)* Configure environment variables in `application.properties` or your environment:
    ```properties
-   DB_URL=jdbc:mysql://localhost:3306/oopdex
-   DB_USERNAME=oopdex
-   DB_PASSWORD=Admin@123
+   DB_URL=jdbc:postgresql://localhost:5433/oopdex_db
+   DB_USERNAME=oopdex_user
+   DB_PASSWORD=oopdex@123
    JWT_SECRET=your-secure-256-bit-secret-key
    ```
 3. Run the Spring Boot application:

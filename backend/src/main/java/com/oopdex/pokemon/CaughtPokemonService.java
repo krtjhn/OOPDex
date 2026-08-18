@@ -65,8 +65,8 @@ public class CaughtPokemonService {
                 // Throw ResourceNotFoundException if the user does not exist
                 .orElseThrow(() -> new CustomExceptions.ResourceNotFoundException("User not found"));
 
-        // Create a new CaughtPokemon entity with no nickname (null) using the found user and Pokemon ID
-        CaughtPokemon caughtPokemon = new CaughtPokemon(user, pokemonId, null);
+        // Create a new CaughtPokemon entity with the owner user and Pokemon ID
+        CaughtPokemon caughtPokemon = new CaughtPokemon(user, pokemonId);
         // Save the new CaughtPokemon entity to the database and return the persisted result
         return caughtPokemonRepository.save(caughtPokemon);
     // End of the catchPokemon method
@@ -88,22 +88,6 @@ public class CaughtPokemonService {
         // Delete the CaughtPokemon record after verifying it belongs to the given user
         caughtPokemonRepository.delete(getOwnedCaughtPokemon(userId, caughtPokemonId));
     // End of the releasePokemon method
-    }
-
-
-    // Annotation to wrap this method in a database transaction
-    @Transactional
-    // Method to update the nickname of a caught Pokemon for a specific user
-    public CaughtPokemon updateNickname(Long userId, Long caughtPokemonId, String nickname) {
-        // Retrieve the CaughtPokemon record that belongs to this user
-        CaughtPokemon cp = getOwnedCaughtPokemon(userId, caughtPokemonId);
-        // Normalize the nickname: set to null if blank or null, otherwise trim whitespace
-        String normalizedNickname = nickname == null || nickname.isBlank() ? null : nickname.trim();
-        // Apply the normalized nickname to the CaughtPokemon entity
-        cp.setNickname(normalizedNickname);
-        // Save the updated CaughtPokemon record and return the result
-        return caughtPokemonRepository.save(cp);
-    // End of the updateNickname method
     }
 
     // Method to retrieve the full list of Pokemon in a user's collection
