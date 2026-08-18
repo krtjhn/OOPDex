@@ -7,8 +7,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.oopdex.user.User;
 // Import all JPA persistence annotations for entity mapping
 import jakarta.persistence.*;
-// Import LocalDateTime for storing the date and time the Pokemon was caught
-import java.time.LocalDateTime;
 
 // Annotation to mark this class as a JPA entity
 @Entity
@@ -42,27 +40,15 @@ public class CaughtPokemon {
     // Field to store the Pokedex ID of the caught Pokemon
     private int pokemonId;
 
-    // Field to store the user-assigned nickname for this caught Pokemon (nullable)
-    private String nickname;
-
-    // Annotation to map this field to the "date_caught" column, non-nullable
-    @Column(name = "date_caught", nullable = false)
-    // Field to store the exact date and time this Pokemon was caught, defaulting to the current time
-    private LocalDateTime dateCaught = LocalDateTime.now();
-
     // Default no-argument constructor required by JPA for entity instantiation
     public CaughtPokemon() {}
 
-    // Convenience constructor to create a new CaughtPokemon with owner, Pokemon ID, and nickname
-    public CaughtPokemon(User user, int pokemonId, String nickname) {
+    // Convenience constructor to create a new CaughtPokemon with owner and Pokemon ID
+    public CaughtPokemon(User user, int pokemonId) {
         // Assign the owner User to the user field
         this.user = user;
         // Assign the Pokedex ID of the caught Pokemon
         this.pokemonId = pokemonId;
-        // Assign the user-provided nickname for the Pokemon
-        this.nickname = nickname;
-        // Record the current date and time as the catch timestamp
-        this.dateCaught = LocalDateTime.now();
     // End of the convenience constructor
     }
 
@@ -106,34 +92,6 @@ public class CaughtPokemon {
         // Assign the provided Pokemon ID to the field
         this.pokemonId = pokemonId;
     // End of the setPokemonId method
-    }
-
-    // Getter method to retrieve the user-assigned nickname of this caught Pokemon
-    public String getNickname() {
-        // Return the stored nickname string
-        return nickname;
-    // End of the getNickname method
-    }
-
-    // Setter method to assign a nickname to this caught Pokemon
-    public void setNickname(String nickname) {
-        // Assign the provided nickname to the field
-        this.nickname = nickname;
-    // End of the setNickname method
-    }
-
-    // Getter method to retrieve the date and time this Pokemon was caught
-    public LocalDateTime getDateCaught() {
-        // Return the stored dateCaught timestamp
-        return dateCaught;
-    // End of the getDateCaught method
-    }
-
-    // Setter method to assign the catch date and time for this caught Pokemon
-    public void setDateCaught(LocalDateTime dateCaught) {
-        // Assign the provided timestamp to the dateCaught field
-        this.dateCaught = dateCaught;
-    // End of the setDateCaught method
     }
 // End of the CaughtPokemon class
 }

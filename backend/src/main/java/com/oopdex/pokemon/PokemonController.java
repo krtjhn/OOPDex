@@ -139,28 +139,5 @@ public class PokemonController {
         return ResponseEntity.ok(caughtPokemonService.getUserCollection(user.getId()));
     // End of the getMyCollection method
     }
-
-    // Annotation to map HTTP PUT requests to /api/pokemon/{caughtPokemonId} to this method
-    @PutMapping("/{caughtPokemonId}")
-    // Restrict this endpoint to authenticated users with the USER role
-    @PreAuthorize("hasRole('USER')")
-    // Method to update a caught Pokemon's nickname for the authenticated user
-    public ResponseEntity<CaughtPokemon> updateCaughtPokemon(@PathVariable Long caughtPokemonId,
-                                                             @Valid @RequestBody UpdateCaughtPokemonRequest updates) {
-        // Validate that the request contains at least one field to update
-        if (updates.isEmpty()) {
-            // Throw an exception if no update fields were provided in the request
-            throw new IllegalArgumentException("At least one update field is required.");
-        // End of the empty request validation check
-        }
-
-        // Retrieve the currently authenticated user from the database
-        User user = getAuthenticatedUser();
-        // Update the nickname and store the resulting CaughtPokemon
-        CaughtPokemon updatedPokemon = caughtPokemonService.updateNickname(user.getId(), caughtPokemonId, updates.nickname());
-        // Return a 200 OK response containing the updated CaughtPokemon object
-        return ResponseEntity.ok(updatedPokemon);
-    // End of the updateCaughtPokemon method
-    }
 // End of the PokemonController class
 }

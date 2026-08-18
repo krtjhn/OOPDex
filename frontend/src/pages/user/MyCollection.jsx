@@ -103,10 +103,8 @@ const MyCollection = () => {
     }
   };
 
-  // Helper function to determine the display name, prioritizing custom nicknames
+  // Helper function to determine the display name from the catalog
   const getDisplayName = (caughtPokemon) => {
-    // Return nickname if set
-    if (caughtPokemon?.nickname) return caughtPokemon.nickname;
     // Resolve name from map
     const p = pokemonMap[caughtPokemon?.pokemonId];
     // Return resolved name or fallback
