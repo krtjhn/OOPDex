@@ -9,7 +9,7 @@
 [![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2.5-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
 [![React](https://img.shields.io/badge/React-18.2.0-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.2.0-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-18-336791?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![JWT](https://img.shields.io/badge/JWT-Auth-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)](https://jwt.io/)
 
@@ -388,7 +388,7 @@ erDiagram
 ### Prerequisites
 - **Java 17+** (JDK 17 or JDK 21 recommended)
 - **Node.js 18+** & `npm`
-- **PostgreSQL 14+**
+- **PostgreSQL 18+**
 
 <br />
 
@@ -485,7 +485,7 @@ GRANT ALL ON SCHEMA public TO oopdex_user;
 ```
 Frontend:   React 18 • Vite • Tailwind CSS • Axios • Lucide React • React Router v6
 Backend:    Java 17+ • Spring Boot 3.2.5 • Spring Security • Spring Data JPA • JJWT
-Database:   MySQL 8.0 • Hibernate 6
+Database:   PostgreSQL 18 • Hibernate 6
 Tooling:    Maven Wrapper • PostCSS • ESLint • Git
 ```
 
